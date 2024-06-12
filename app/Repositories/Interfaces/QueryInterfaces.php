@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repostiories\Interfaces;
+namespace App\Repositories\Interfaces;
 
 
-interface QueryIntefaces{
+interface QueryInterfaces{
     public function all($relational = [], bool $count = false);
     public function where(array $data ,$relational = [], array $operator = [], bool $count = false);
     public function search(array $data, $relational = [],bool $count = false);

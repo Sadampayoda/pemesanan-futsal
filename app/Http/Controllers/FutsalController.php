@@ -2,29 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateFutsalRequest;
-use App\Http\Requests\UpdateFutsalRequest;
+use App\Http\Requests\{CreateFutsalRequest,UpdateFutsalRequest};
 use App\Jobs\ProsesUploadFile;
 use App\Models\Futsal;
-use App\Repostiories\CrudRepositories;
+use App\Repositories\CrudRepositories;
+use App\Repositories\QueryRepositories;
 use Illuminate\Http\Request;
 
 class FutsalController extends Controller
 {
 
-    protected $crud;
+    protected $crud,$query;
 
     public function __construct()
     {
-        $this->crud = new CrudRepositories(Futsal::class);
+        $this->crud = new CrudRepositories(Futsal::class,4);
+        $this->query = new QueryRepositories(Futsal::class,4);
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+
         return view('content.auth.futsal.index',[
-            $this->crud->all()
+            'data' => (auth()->user()->level == 'users') ? $this->crud->all()
+             : $this->query->where(['user_id' => auth()->user()->id],['user'],['='])
         ]);
     }
 

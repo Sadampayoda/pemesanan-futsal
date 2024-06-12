@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\UsersRequest;
-use App\Models\User;
-use App\Repostiories\CrudRepositories;
+use App\Http\Requests\{LoginRequest,UsersRequest};
+use App\Models\{User};
+
+use App\Repositories\{CrudRepositories};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +33,7 @@ class ValidationController extends Controller
         if (Auth::attempt($credentials)) {
             $loginRequest->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
@@ -43,7 +43,8 @@ class ValidationController extends Controller
 
     public function registerValidate(UsersRequest $usersRequest)
     {
-        $data = $usersRequest->only(['name','email','password','level']);
+        // dd($usersRequest);
+        $data = $usersRequest->only(['name','email','password']);
         $this->crud->create($data);
         return redirect()->route('login')->with('success', 'Akun anda berhasil dibuat');
     }

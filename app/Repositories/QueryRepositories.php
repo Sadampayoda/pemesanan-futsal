@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Repostiories;
-use App\Repostiories\Interfaces\QueryIntefaces;
+namespace App\Repositories;
+// use QueryInte
+use App\Repositories\Interfaces\QueryInterfaces;
 use Illuminate\Database\Eloquent\Model;
 
-class QueryRepositories implements QueryIntefaces{
+class QueryRepositories implements QueryInterfaces{
     protected Model $model;
     protected int $paginate;
     public function __construct($model, int $paginate = 0)

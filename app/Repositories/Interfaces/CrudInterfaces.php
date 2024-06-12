@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repostiories\Interfaces;
+namespace App\Repositories\Interfaces;
 
 
-interface CrudIntefaces{
+interface CrudInterfaces{
     public function all();
     public function find($id);
     public function create(array $data);

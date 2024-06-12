@@ -25,8 +25,6 @@ class UsersRequest extends FormRequest
             'name' => 'required|min:6|max:50',
             'email' => 'required|unique:users,email|email',
             'password' => 'required|min:8|confirmed',
-            'confirmed' => 'required',
-            'level' => 'required|in:admin,futsal,users',
         ];
     }
 }

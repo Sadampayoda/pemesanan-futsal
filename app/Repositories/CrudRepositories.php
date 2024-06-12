@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Repostiories;
-use App\Repostiories\Interfaces\CrudIntefaces;
+namespace App\Repositories;
+
+use App\Repositories\Interfaces\CrudInterfaces;
 use Illuminate\Database\Eloquent\Model;
 
-class CrudRepositories implements CrudIntefaces{
+class CrudRepositories implements CrudInterfaces{
 
     protected Model $model;
     protected int $paginate;
@@ -15,7 +16,7 @@ class CrudRepositories implements CrudIntefaces{
     }
     public function all(){
         return ($this->paginate)
-         ? $this->model->all()->paginate($this->paginate)
+         ? $this->model->paginate($this->paginate)
          : $this->model->all();
     }
 
